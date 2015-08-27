@@ -61,7 +61,18 @@ List.prototype = {
         Insert a new Node at the head of the list.
     */
     insertAtHead: function(data) {
-        // Enter code here!
+        // if linkedList is empty
+
+            //create a new node and name it a new variable
+            var current = this.makeNode();
+           // then data coming in is set as current data
+            current.data = data; 
+            //then the current.next becomes the old start
+            current.next= this.start;
+            //now set the var current as the new start
+            this.start=current;
+           
+      
     },
 
     /*
@@ -69,7 +80,10 @@ List.prototype = {
         Traverse the list. Return the amount of Nodes in the list.
     */
     length: function() {
-        // Enter code here!
+    for(var current = this.start, i = 0; current!==null;current=current.next,i++);{
+
+    }
+        return i;
     },
 
     /*
@@ -77,18 +91,40 @@ List.prototype = {
         Traverse the list. If a Node with the data passed in exists, then return
         true. If not, return false
     */
+
+    //just a method
     exists: function(data) {
         // Enter code here!
+        var node = this.start;
+        //loops through list until node === null
+        while(node!==null){
+            if(data===node.data){
+                return true;
+            }
+                // since data !== node.data
+                // then we set no to the next node
+                node = node.next;
+         }
+         //one node === null we finish the while loop 
+        return false;
     },
 
     /*
         Method: each
         Traverse the list. For each Node, call the function f on that Node.
         Example: f(current);
-    */
-    each: function(f) {
+    *///f is a call back function which is being passed
+    each: function(f) { 
+    // check for the call back function below
+        var node = this.start;
+        while(node !== null){
+          f(node);
+          node=node.next;
+        }
         // Enter code here!
+      
     },
+
 
     /*
         Method: indexOf
@@ -112,6 +148,8 @@ List.prototype = {
         Traverse the List.  Find the ith Node in the list and insert a new Node
          after it.  You must preserve the list structure!
     */
+
+    //08/27/2015 due
     insertAt: function(i, data){
         // Enter code here!
     },
@@ -125,8 +163,16 @@ List.prototype = {
     delete: function(data) {
         // Enter code here!
     }
-}
+};
 
+function testCallback(obj){
+    var newData = "new value";
+    console.log("the data is = " + obj);
+    obj.data = newData;
+    console.log("now the data is = " + newData);
+
+
+};
 
 /* LinkedList initialization */
 var LinkedList = new List();
@@ -135,5 +181,9 @@ while(i <= 20) {
     LinkedList.addAtEnd(i);
     i+=2;
 }
+LinkedList.insertAtHead("breakfast");
+console.log(LinkedList.length());
+
+
 
 LinkedList.print();
